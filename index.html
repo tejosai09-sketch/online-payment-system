@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure Silver - PhonePe Style Demo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #111;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .phone {
+            width: 390px;
+            max-width: 100%;
+            height: 844px;
+            margin: 15px auto;
+            background: #171717;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 30px #000;
+        }
+
+        .status {
+            height: 30px;
+            padding: 7px 15px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            background: #111;
+        }
+
+        .app {
+            height: calc(100% - 30px);
+            overflow: auto;
+            padding-bottom: 72px;
+        }
+
+        .app::-webkit-scrollbar {
+            display: none;
+        }
+
+        .page {
+            display: none;
+            min-height: 100%;
+            padding: 0 14px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* HOME */
+
+        .hero {
+            height: 225px;
+            margin: 0 -14px 10px;
+            padding: 17px 15px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 18%,
+                    #6336e8,
+                    #4c20d0 45%,
+                    #31129e 100%);
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+            margin: 8px auto 7px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 43px;
+            color: #5b24d5;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: 23px;
+            margin: 3px 0 4px;
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .heading {
+            font-size: 13px;
+            font-weight: bold;
+            margin: 12px 0 7px;
+        }
+
+        .quick {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .quick button,
+        .tile button {
+            border: 0;
+            color: #fff;
+            background: #252525;
+            border-radius: 10px;
+            padding: 8px 3px;
+            min-height: 78px;
+        }
+
+        .qicon {
+            width: 39px;
+            height: 39px;
+            margin: auto;
+            border-radius: 50%;
+            background: #fff;
+            color: #5623cf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .quick span,
+        .tile span {
+            display: block;
+            font-size: 10px;
+            margin-top: 5px;
+            line-height: 12px;
+        }
+
+        .strip {
+            margin: 8px 0;
+            background: #292929;
+            border: 1px solid #555;
+            border-radius: 9px;
+            padding: 9px;
+            font-size: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pill {
+            background: #7c50e9;
+            padding: 6px 9px;
+            border-radius: 8px;
+            font-size: 9px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+        }
+
+        .tile {
+            background: #252525;
+            border-radius: 9px;
+            text-align: center;
+        }
+
+        .tile button {
+            width: 100%;
+            background: transparent;
+        }
+
+        .tile .qicon {
+            width: 31px;
+            height: 31px;
+            font-size: 16px;
+        }
+
+        .more {
+            float: right;
+            border: 0;
+            background: #333;
+            color: #fff;
+            border-radius: 7px;
+            padding: 5px 8px;
+            font-size: 9px;
+        }
+
+        /* COMMON */
+
+        .top {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .back {
+            border: 0;
+            background: none;
+            color: #fff;
+            font-size: 26px;
+            padding: 0;
+        }
+
+        .topicons {
+            margin-left: auto;
+            font-size: 16px;
+            letter-spacing: 5px;
+        }
+
+        .search {
+            width: 100%;
+            height: 43px;
+            border: 0;
+            border-radius: 24px;
+            background: #303030;
+            color: #fff;
+            padding: 0 16px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .notice {
+            margin: 9px 0;
+            padding: 10px;
+            background: #272727;
+            border-radius: 8px;
+            font-size: 10px;
+        }
+
+        .section {
+            font-size: 10px;
+            font-weight: bold;
+            color: #ddd;
+            margin: 14px 0 6px;
+        }
+
+        .contact {
+            height: 61px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            flex: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #666;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .cinfo {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .cinfo b {
+            font-size: 11px;
+        }
+
+        .cinfo small {
+            display: block;
+            color: #aaa;
+            font-size: 9px;
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .date {
+            font-size: 8px;
+            color: #999;
+        }
+
+        .newpay {
+            position: absolute;
+            right: 15px;
+            bottom: 75px;
+            border: 0;
+            border-radius: 22px;
+            background: #7b4be8;
+            color: #fff;
+            padding: 12px 15px;
+            font-size: 11px;
+        }
+
+        /* CHAT */
+
+        .chatHeader {
+            height: 58px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .chatUser {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .chatUser small {
+            display: block;
+            color: #aaa;
+            margin-top: 3px;
+        }
+
+        .msgs {
+            padding: 10px 4px 80px;
+        }
+
+        .msg {
+            max-width: 72%;
+            margin: 8px 0;
+            padding: 9px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+
+        .received {
+            background: #292929;
+            margin-right: auto;
+        }
+
+        .sent {
+            background: #53309e;
+            margin-left: auto;
+        }
+
+        .msg small {
+            display: block;
+            color: #bbb;
+            font-size: 8px;
+            margin-top: 5px;
+        }
+
+        .amount {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .composer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 62px;
+            background: #222;
+            padding: 9px;
+            display: flex;
+            gap: 7px;
+        }
+
+        .composer input {
+            flex: 1;
+            min-width: 0;
+            border: 0;
+            border-radius: 22px;
+            background: #333;
+            color: #fff;
+            padding: 0 15px;
+        }
+
+        .sendbtn {
+            width: 44px;
+            border: 0;
+            border-radius: 50%;
+            background: #7b4be8;
+            color: #fff;
+        }
+
+        /* PIN */
+
+        .pinpage {
+            background: #fff;
+            color: #222;
+            margin: 0 -14px;
+            min-height: 100%;
+            padding: 20px 22px;
+        }
+
+        .pinTop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .pinTitle {
+            text-align: center;
+            margin-top: 42px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 13px;
+            margin: 18px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #777;
+        }
+
+        .dot.on {
+            background: #222;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 45px;
+        }
+
+        .key {
+            height: 60px;
+            border: 0;
+            background: #fafafa;
+            font-size: 21px;
+            color: #222;
+            border-radius: 8px;
+        }
+
+        .check {
+            height: 50px;
+            border: 0;
+            border-radius: 8px;
+            background: #26367d;
+            color: #fff;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .loading {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #555c;
+            padding: 18px;
+            border-radius: 7px;
+            text-align: center;
+            display: none;
+            z-index: 20;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 4px solid #aaa;
+            border-top-color: #fff;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .toast {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 75px;
+            background: #333;
+            padding: 12px;
+            border-radius: 9px;
+            text-align: center;
+            display: none;
+            z-index: 30;
+            font-size: 11px;
+        }
+
+        /* BOTTOM NAVIGATION */
+
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: #202020;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .nav {
+            border: 0;
+            background: none;
+            color: #aaa;
+            font-size: 9px;
+        }
+
+        .nav b {
+            display: block;
+            font-size: 21px;
+            margin-bottom: 2px;
+        }
+
+        .nav.active {
+            color: #c39bff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="phone">
+
+        <div class="status">
+            <span>12:49</span>
+            <span>◔ ◡ ▮ 78%</span>
+        </div>
+
+        <div class="app">
+
+            <!-- HOME SCREEN -->
+
+            <section id="home" class="page active">
+
+                <div class="hero">
+                    <div class="logo">✿</div>
+                    <h1>Pure Silver</h1>
+                    <p>Save daily with ₹10 🪙</p>
+                </div>
+
+                <div class="heading">
+                    Money Transfers
+                    <button class="more">Refer + ₹200</button>
+                </div>
+
+                <div class="quick">
+
+                    <button onclick="openPage('send')">
+                        <div class="qicon">📱</div>
+                        <span>To Mobile<br>Number</span>
+                    </button>
+
+                    <button onclick="openPage('send')">
+                        <div class="qicon">🏦</div>
+                        <span>To Bank &<br>Self A/C</span>
+                    </button>
+
+                    <button onclick="openPage('send')">
+                        <div class="qicon">👤</div>
+                        <span>PhonePe<br>Wallet</span>
+                    </button>
+
+                    <button onclick="openPage('balance')">
+                        <div class="qicon">₹</div>
+                        <span>Check<br>Balance</span>
+                    </button>
+
+                </div>
+
+                <div class="strip">
+                    🪙 Buy 24K Gold daily at just ₹10
+                    <span class="pill">Start saving</span>
+                </div>
+
+                <div class="heading">Recharge & Bills</div>
+
+                <div class="grid">
+
+                    <div class="tile">
+                        <button onclick="toast('Mobile Recharge opened')">
+                            <div class="qicon">📱</div>
+                            <span>Mobile<br>Recharge</span>
+                        </button>
+                    </div>
+
+                    <div class="tile">
+                        <button onclick="toast('Rent via Credit Card opened')">
+                            <div class="qicon">🏠</div>
+                            <span>Rent via<br>Credit Card</span>
+                        </button>
+                    </div>
+
+                    <div class="tile">
+                        <button onclick="toast('Electricity Bill opened')">
+                            <div class="qicon">💡</div>
+                            <span>Electricity<br>Bill</span>
+                        </button>
+                    </div>
+
+                    <div class="tile">
+                        <button onclick="toast('Loan Repayment opened')">
+                            <div class="qicon">₹</div>
+                            <span>Loan<br>Repayment</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="strip">
+                    Get Jio SIM delivered – FREE
+                    <span class="pill">More ›</span>
+                </div>
+
+                <div class="heading">Loans</div>
+
+                <div class="grid">
+
+                    <div class="tile">
+                        <button onclick="toast('Personal Loan opened')">
+                            <div class="qicon">👤</div>
+                            <span>Personal<br>Loan</span>
+                        </button>
+                    </div>
+
+                    <div class="tile">
+                        <button onclick="toast('Mutual Funds opened')">
+                            <div class="qicon">📊</div>
+                            <span>Mutual<br>Funds</span>
+                        </button>
+                    </div>
+
+                    <div class="tile">
+                        <button onclick="toast('Gold Loan opened')">
+                            <div class="qicon">🪙</div>
+                            <span>Gold<br>Loan</span>
+                        </button>
+                    </div>
+
+                    <div class="tile">
+                        <button onclick="toast('Credit Score opened')">
+                            <div class="qicon">★</div>
+                            <span>Credit<br>Score</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SEND MONEY -->
+
+            <section id="send" class="page">
+
+                <div class="top">
+                    <button class="back" onclick="openPage('home')">‹</button>
+                    Send Money
+                    <span class="topicons">↻ ⓘ ⋮</span>
+                </div>
+
+                <input id="contactSearch" class="search" placeholder="🔍 Search any mobile number"
+                    oninput="filterPeople()">
+
+                <div class="notice">
+                    ▣ Split expenses
+                    <span style="float:right;color:#b794ff">New ›</span>
+                </div>
+
+                <div class="section">PAYMENTS & CHAT</div>
+
+                <div id="people">
+
+                    <div class="contact" data-search="musku raju anna">
+                        <div class="avatar">M</div>
+                        <div class="cinfo" onclick="openChat('Musku Raju Anna')">
+                            <b>Musku Raju Anna</b>
+                            <small>👍</small>
+                        </div>
+                        <span class="date">02/10</span>
+                    </div>
+
+                    <div class="contact" data-search="sudheera frnd">
+                        <div class="avatar">S</div>
+                        <div class="cinfo" onclick="openChat('Sudheera Frnd')">
+                            <b>Sudheera Frnd</b>
+                            <small>You : ₹30 - Sent Securely</small>
+                        </div>
+                        <span class="date">02/10</span>
+                    </div>
+
+                    <div class="contact" data-search="hansika">
+                        <div class="avatar">H</div>
+                        <div class="cinfo" onclick="openChat('Hansika')">
+                            <b>Hansika</b>
+                            <small>₹13 - Received Instantly</small>
+                        </div>
+                        <span class="date">01/10</span>
+                    </div>
+
+                    <div class="contact" data-search="meghana">
+                        <div class="avatar">M</div>
+                        <div class="cinfo" onclick="openChat('Meghana')">
+                            <b>Meghana</b>
+                            <small>₹30 - Received Instantly</small>
+                        </div>
+                        <span class="date">29/09</span>
+                    </div>
+
+                    <div class="contact" data-search="anudeepika aunty hstl">
+                        <div class="avatar">A</div>
+                        <div class="cinfo" onclick="openChat('Anudeepika Aunty Hstl')">
+                            <b>Anudeepika Aunty Hstl</b>
+                            <small>You : ₹11,000 - Sent Securely</small>
+                        </div>
+                        <span class="date">26/09</span>
+                    </div>
+
+                    <div class="contact" data-search="chinnodu">
+                        <div class="avatar">C</div>
+                        <div class="cinfo" onclick="openChat('Chinnodu ❤')">
+                            <b>Chinnodu ❤</b>
+                            <small>You : ₹14,600 - Failed</small>
+                        </div>
+                        <span class="date">25/09</span>
+                    </div>
+
+                    <div class="contact" data-search="mummy">
+                        <div class="avatar">M</div>
+                        <div class="cinfo">
+                            <b>Mummy</b>
+                            <small>₹500 - Received Instantly</small>
+                        </div>
+                        <span class="date">25/09</span>
+                    </div>
+
+                    <div class="contact" data-search="mr asam laxman">
+                        <div class="avatar">A</div>
+                        <div class="cinfo">
+                            <b>Mr ASAM LAXMAN</b>
+                            <small>You : ₹50 - Sent Securely</small>
+                        </div>
+                        <span class="date">24/09</span>
+                    </div>
+
+                    <div class="contact" data-search="vigneshwara fertility">
+                        <div class="avatar">V</div>
+                        <div class="cinfo">
+                            <b>Vigneshwara Fertility</b>
+                            <small>You : ₹9,000 - Sent Securely</small>
+                        </div>
+                        <span class="date">24/09</span>
+                    </div>
+
+                    <div class="contact" data-search="jannu anju">
+                        <div class="avatar">J</div>
+                        <div class="cinfo">
+                            <b>Janny / Anju</b>
+                            <small>You : ₹70 - Sent Securely</small>
+                        </div>
+                        <span class="date">23/09</span>
+                    </div>
+
+                    <div class="contact" data-search="konduru">
+                        <div class="avatar">K</div>
+                        <div class="cinfo">
+                            <b>Konduru Balamakshmi</b>
+                            <small>You : ₹100 - Sent Securely</small>
+                        </div>
+                        <span class="date">23/09</span>
+                    </div>
+
+                </div>
+
+                <button class="newpay" onclick="toast('New payment selected')">
+                    ＋ New Payment
+                </button>
+
+            </section>
+
+
+            <!-- CHAT SCREEN -->
+
+            <section id="chat" class="page" style="padding:0">
+
+                <div class="chatHeader">
+
+                    <button class="back" onclick="openPage('send')" style="margin-left:12px">‹</button>
+
+                    <div class="avatar" id="chatAvatar">S</div>
+
+                    <div class="chatUser" id="chatName">
+                        Sudheera Frnd
+                        <small>+91 ••••• ••••</small>
+                    </div>
+
+                    <span style="margin-right:12px">ⓘ ⋮</span>
+
+                </div>
+
+                <div class="msgs" id="msgs">
+
+                    <div class="msg received">
+                        <div class="amount">₹200</div>
+                        RECEIVED
+                        <small>September 04, 2026</small>
+                    </div>
+
+                    <div class="msg received">
+                        <div class="amount">₹20</div>
+                        RECEIVED
+                        <small>September 04, 2026</small>
+                    </div>
+
+                    <div class="msg sent">
+                        <div class="amount">₹50</div>
+                        SENT
+                        <small>September 04, 2026</small>
+                    </div>
+
+                    <div class="msg received">
+                        <div class="amount">₹40</div>
+                        RECEIVED
+                        <small>September 03, 2026</small>
+                    </div>
+
+                    <div class="msg sent">
+                        <div class="amount">₹10</div>
+                        SENT
+                        <small>September 03, 2026</small>
+                    </div>
+
+                    <div class="msg received">
+                        <div class="amount">₹30</div>
+                        RECEIVED
+                        <small>September 03, 2026</small>
+                    </div>
+
+                </div>
+
+                <div class="composer">
+                    <input id="chatAmount" placeholder="Enter amount or chat">
+                    <button class="sendbtn" onclick="sendChat()">➤</button>
+                </div>
+
+            </section>
+
+
+            <!-- CHECK BALANCE / PIN -->
+
+            <section id="balance" class="page" style="padding:0">
+
+                <div class="pinpage">
+
+                    <div class="pinTop">
+                        <button class="back" style="color:#222" onclick="openPage('home')">‹</button>
+
+                        <span>▣</span>
+                    </div>
+
+                    <div class="pinTitle">
+                        You are checking your<br>account balance
+                    </div>
+
+                    <p style="text-align:center;font-size:11px;color:#555;margin-top:12px">
+                        Enter your PIN
+                    </p>
+
+                    <div class="dots">
+                        <i class="dot" id="d1"></i>
+                        <i class="dot" id="d2"></i>
+                        <i class="dot" id="d3"></i>
+                        <i class="dot" id="d4"></i>
+                    </div>
+
+                    <div class="keypad">
+
+                        <button class="key" onclick="pin(1)">1</button>
+                        <button class="key" onclick="pin(2)">2</button>
+                        <button class="key" onclick="pin(3)">3</button>
+
+                        <button class="key" onclick="pin(4)">4</button>
+                        <button class="key" onclick="pin(5)">5</button>
+                        <button class="key" onclick="pin(6)">6</button>
+
+                        <button class="key" onclick="pin(7)">7</button>
+                        <button class="key" onclick="pin(8)">8</button>
+                        <button class="key" onclick="pin(9)">9</button>
+
+                        <button class="key" onclick="deletePin()">⌫</button>
+                        <button class="key" onclick="pin(0)">0</button>
+                        <button class="key" onclick="deletePin()">•</button>
+
+                    </div>
+
+                    <button class="check" onclick="checkBalance()">
+                        Check Balance
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            Loading...
+        </div>
+
+        <div class="toast" id="toast"></div>
+
+        <!-- BOTTOM NAVIGATION -->
+
+        <div class="bottom">
+
+            <button class="nav active" onclick="openPage('home')">
+                <b>⌂</b>Home
+            </button>
+
+            <button class="nav" onclick="openPage('send')">
+                <b>⌕</b>Search
+            </button>
+
+            <button class="nav" onclick="openPage('send')">
+                <b>◉</b>Pay
+            </button>
+
+            <button class="nav" onclick="toast('No new alerts')">
+                <b>♧</b>Alerts
+            </button>
+
+            <button class="nav" onclick="toast('History opened')">
+                <b>◷</b>History
+            </button>
+
+        </div>
+
+    </div>
+    <script>
+        let entered = "";
+
+        function openPage(id) {
+            document.querySelectorAll(".page").forEach(x => {
+                x.classList.remove("active");
+            });
+
+            document.getElementById(id).classList.add("active");
+
+            document.querySelector(".app").scrollTop = 0;
+
+            document.querySelectorAll(".nav").forEach(x => {
+                x.classList.remove("active");
+            });
+
+            if (id === "home") {
+                document.querySelectorAll(".nav")[0].classList.add("active");
+            } else if (id === "send" || id === "chat") {
+                document.querySelectorAll(".nav")[2].classList.add("active");
+            }
+        }
+
+        function toast(t) {
+            const x = document.getElementById("toast");
+
+            x.textContent = t;
+            x.style.display = "block";
+
+            setTimeout(() => {
+                x.style.display = "none";
+            }, 1800);
+        }
+
+        function filterPeople() {
+            const q = document
+                .getElementById("contactSearch")
+                .value.toLowerCase();
+
+            document.querySelectorAll("#people .contact").forEach(x => {
+                x.style.display = x.dataset.search.includes(q)
+                    ? "flex"
+                    : "none";
+            });
+        }
+
+        function openChat(name) {
+            document.getElementById("chatName").innerHTML =
+                name + "<small>+91 ••••• ••••</small>";
+
+            document.getElementById("chatAvatar").textContent =
+                name.charAt(0);
+
+            openPage("chat");
+        }
+
+        function sendChat() {
+            const v = document.getElementById("chatAmount").value.trim();
+
+            if (!v) {
+                toast("Enter an amount or message");
+                return;
+            }
+
+            const m = document.createElement("div");
+            m.className = "msg sent";
+
+            const amount = document.createElement("div");
+            amount.className = "amount";
+            amount.textContent = v;
+
+            const status = document.createTextNode("SENT");
+
+            const time = document.createElement("small");
+            time.textContent = "Just now";
+
+            m.appendChild(amount);
+            m.appendChild(status);
+            m.appendChild(time);
+
+            document.getElementById("msgs").appendChild(m);
+
+            document.getElementById("chatAmount").value = "";
+        }
+
+        function pin(n) {
+            if (entered.length >= 4) return;
+
+            entered += n;
+
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("d" + i)
+                    .classList.toggle("on", i <= entered.length);
+            }
+        }
+
+        function deletePin() {
+            entered = entered.slice(0, -1);
+
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("d" + i)
+                    .classList.toggle("on", i <= entered.length);
+            }
+        }
+
+        function checkBalance() {
+            if (entered.length !== 4) {
+                toast("Please enter 4 digit PIN");
+                return;
+            }
+
+            const l = document.getElementById("loading");
+            l.style.display = "block";
+
+            setTimeout(() => {
+                l.style.display = "none";
+                entered = "";
+
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById("d" + i)
+                        .classList.remove("on");
+                }
+
+                toast("Balance: ₹1,000");
+            }, 2200);
+        }
+    </script>
+
+</body>
+
+</html>
